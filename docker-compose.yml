@@ -1,0 +1,36 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=eragon123
+      - POSTGRES_USER=hippolyteleveque
+  backend:
+    build: ./backend
+    environment:
+      - DB_PORT=5432
+      - DB_USERNAME=hippolyteleveque
+      - DB_PASSWORD=eragon123
+      - DB_NAME=hippolyteleveque
+      - DB_HOST=db
+    command: ./docker-entrypoint.sh
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/code
+  
+  # frontend:
+  #   image: ./frontend
+    
+    
+  nginx:
+    build: ./nginx
+    ports:
+        - 3000:80
+    volumes:
+        - ./backend:/code
+    depends_on: 
+        - backend
+        # - frontend

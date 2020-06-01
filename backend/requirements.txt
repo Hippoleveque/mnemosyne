@@ -1,0 +1,10 @@
+setuptools
+pytest
+django
+djangorestframework
+psycopg2
+djangorestframework_simplejwt
+uuid
+pandas
+gunicorn
+xlrd >= 1.0.0
